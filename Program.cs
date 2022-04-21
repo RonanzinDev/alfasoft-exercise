@@ -14,14 +14,17 @@ class Program
             var file = new StreamReader(path);
             string? user;
             bool program = true;
+
             while (program)
             {
                 while ((user = file.ReadLine()) != null)
                 {
                     using (var Logfile = File.AppendText(currentDir + "/log.log"))
+
                     {
                         using (var client = new HttpClient())
                         {
+
                             string id = GetId(user).Result;
                             client.BaseAddress = new Uri($"https://api.bitbucket.org/2.0/");
                             client.DefaultRequestHeaders.Accept.Clear();
@@ -32,7 +35,7 @@ class Program
                             var result = await reader.ReadToEndAsync();
                             await Logfile.WriteLineAsync($"{result} - Date({DateTime.UtcNow})");
                             Console.WriteLine($"\nUser: {user}");
-                            Console.WriteLine($"\nUrl: https://api.bitbucket.org/2.0/user/{id}");
+                            Console.WriteLine($"\nUrl: https://api.bitbucket.org/2.0/users/{id}");
                             Console.WriteLine($"\nRESPONSE: \n{result}");
                             Console.WriteLine(id);
                             Console.WriteLine("----------------------------------------------------------------------------------------------");
