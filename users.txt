@@ -1,3 +1,2 @@
-alfasoft
-usertest
 ronanzindev
+jwalton
